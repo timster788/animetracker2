@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import FavoritesListItem from './FavoritesListItem';
+import { API_BASE_URL } from '../config';
+import { loadAuthToken } from '../local-storage';
 //=====================================================================================================================================
 export default class FavoritesList extends Component {
   constructor() {
@@ -12,8 +14,13 @@ export default class FavoritesList extends Component {
   }
   //=====================================================================================================================================
   componentDidMount() {
-    axios
-      .get('/favorites')
+    axios({
+      method: 'GET',
+      url: `${API_BASE_URL}/favorites`,
+      headers: {
+        Authorization: 'Bearer ' + loadAuthToken()
+      }
+    })
       .then(res => {
         this.setState({
           dbData: res.data.data
@@ -26,8 +33,10 @@ export default class FavoritesList extends Component {
   //=====================================================================================================================================
   renderFavoritesList() {
     if (this.state.dbData) {
-      return this.state.dbData.map(manganime => {
-        return <FavoritesListItem key={manganime.id} data={manganime} />;
+      return this.state.dbData.map(results => {
+        console.log('results', results);
+
+        return <FavoritesListItem key={results.id} data={results} />;
       });
     } else {
       return <div>Your list is empty</div>;
@@ -37,7 +46,6 @@ export default class FavoritesList extends Component {
   render() {
     return (
       <div className="FavoritesList">
-        {/* <div id="edit-favorite"><Link to={`/edit/${props.movies.id}`} moves={props.movies}>Edit</Link></div> */}
         <div id="favorite-header">My Favorites</div>
         {this.renderFavoritesList()}
       </div>

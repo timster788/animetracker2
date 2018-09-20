@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import { API_BASE_URL } from '../config';
+import { loadAuthToken } from '../local-storage';
 //=====================================================================================================================================
 export default class MangaFavoritesEdit extends Component {
   constructor(props) {
@@ -17,8 +19,13 @@ export default class MangaFavoritesEdit extends Component {
   }
   //=====================================================================================================================================
   componentDidMount() {
-    axios
-      .get(`/favorites/${this.props.match.params.dbid}`)
+    axios({
+      method: 'GET',
+      url: `${API_BASE_URL}/favorites/${this.props.match.params.dbid}`,
+      headers: {
+        Authorization: 'Bearer ' + loadAuthToken()
+      }
+    })
       .then(data => {
         const favoriteManga = data.data.data;
         this.setState({
@@ -31,8 +38,13 @@ export default class MangaFavoritesEdit extends Component {
   }
   //=====================================================================================================================================
   deleteManga() {
-    axios
-      .delete(`/favorites/${this.props.match.params.dbid}`)
+    axios({
+      method: 'DELETE',
+      url: `${API_BASE_URL}/favorites/${this.props.match.params.dbid}`,
+      headers: {
+        Authorization: 'Bearer ' + loadAuthToken()
+      }
+    })
       .then(res => {
         this.setState({
           fireRedirect: true
@@ -53,12 +65,18 @@ export default class MangaFavoritesEdit extends Component {
   //=====================================================================================================================================
   handleFormSubmit(event) {
     event.preventDefault();
-    axios
-      .put(`/favorites/${this.props.match.params.dbid}`, {
+    axios({
+      method: 'PUT',
+      url: `${API_BASE_URL}/favorites/${this.props.match.params.dbid}`,
+      headers: {
+        Authorization: 'Bearer ' + loadAuthToken()
+      },
+      data: {
         chapters_read: this.state.chapters_read,
         status: this.state.status,
         rating: this.state.rating
-      })
+      }
+    })
       .then(data => {
         this.setState({
           fireRedirect: true
@@ -87,7 +105,7 @@ export default class MangaFavoritesEdit extends Component {
             type="number"
             placeholder="Chapters Read"
             name="chapters_read"
-            value={this.state.chapters_read}
+            value={this.state.chapters_read || ''}
             onChange={this.handleInputChange}
           />
           <br />

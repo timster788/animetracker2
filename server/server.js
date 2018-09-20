@@ -9,9 +9,9 @@ const localStrategy = require('./passport/localStrategy');
 const jwtStrategy = require('./passport/jwt');
 
 const userRouter = require('./routes/users');
-const animeRouter = require('./routes/animes');
+const favoriteRouter = require('./routes/favorites');
 const authRouter = require('./routes/auth');
-
+// const favoritesRouter = require('./routes/favorites');
 // const { dbConnect } = require('./db-mongoose');
 
 passport.use(localStrategy);
@@ -32,10 +32,10 @@ app.use(cors());
 
 app.use(express.json());
 
-app.use('/api/user', userRouter);
-app.use('/api/animes', jwtAuth, animeRouter);
+app.use('/api/users', userRouter);
+app.use('/api/favorites', jwtAuth, favoriteRouter);
 app.use('/api', authRouter);
-
+// app.use('/api/favorites', favoritesRouter);
 app.use(
   cors({
     origin: CLIENT_ORIGIN

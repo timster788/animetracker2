@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Login from './components/Login';
-import Register from './components/Register';
+import './index.css';
+
+import LoginPage from './components/LoginPage';
+import RegistrationPage from './components/registration-page';
 import Header from './components/Header';
 import Home from './components/Home';
 import Search from './components/Search';
@@ -21,8 +23,8 @@ export default class App extends Component {
         <div className="App">
           <Header />
           <Switch>
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
+            <Route path="/login" component={LoginPage} />
+            <Route path="/register" component={RegistrationPage} />
             <Route path="/results" component={SearchResults} />
             <Route path="/search" component={Search} />
             <Route path="/anime/:id" component={SingleAnime} />

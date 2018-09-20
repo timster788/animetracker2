@@ -4,6 +4,17 @@ import Characters from './Characters';
 import StreamingLinks from './StreamingLinks';
 import Reviews from './Reviews';
 import RelatedMedia from './RelatedMedia';
+import { API_BASE_URL } from '../config';
+import { loadAuthToken } from '../local-storage';
+// const authToken = loadAuthToken();
+
+// if (authToken) {
+//   const token = authToken;
+//   axios.defaults.headers.common[‘Authorization’] = authToken
+//   // store.dispatch(setAuthToken(token));
+//   // store.dispatch(refreshAuthToken());
+// }
+
 //=====================================================================================================================================
 export default class SingleAnime extends Component {
   constructor() {
@@ -117,7 +128,8 @@ export default class SingleAnime extends Component {
       return <div id="cover-image" style={bg} />;
     } else {
       let bg = {
-        backgroundImage: 'url(http://res.cloudinary.com/damark726/image/upload/v1523327404/No_image_available_ed3rvn.svg)',
+        backgroundImage:
+          'url(http://res.cloudinary.com/damark726/image/upload/v1523327404/No_image_available_ed3rvn.svg)',
         backgroundColor: '#bbbbbb'
       };
       return <div id="cover-image" style={bg} />;
@@ -134,7 +146,8 @@ export default class SingleAnime extends Component {
       return <div id="poster-image" style={bg} />;
     } else {
       let bg = {
-        backgroundImage: 'url(http://res.cloudinary.com/damark726/image/upload/v1523327404/No_image_available_ed3rvn.svg)',
+        backgroundImage:
+          'url(http://res.cloudinary.com/damark726/image/upload/v1523327404/No_image_available_ed3rvn.svg)',
         backgroundColor: '#bbbbbb'
       };
       return <div id="poster-image" style={bg} />;
@@ -253,7 +266,10 @@ export default class SingleAnime extends Component {
     event.preventDefault();
     axios({
       method: 'POST',
-      url: '/favorites',
+      headers: {
+        Authorization: 'Bearer ' + loadAuthToken()
+      },
+      url: `${API_BASE_URL}/favorites`,
       data: {
         title: this.renderTitlesForFavorties(),
         series_type: this.state.singleAnime.type,

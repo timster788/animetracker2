@@ -1,13 +1,24 @@
 const mongoose = require('mongoose');
 const { DATABASE_URL } = require('../config');
 
-const Anime = require('../models/anime');
-
+const Favorite = require('../models/favorite');
+let updateFavorite = {
+  episodes_watched: 7,
+  chapters_read: undefined,
+  status: 'Complete',
+  rating: 7,
+  userId: '5ba296dab2e84f6f33f9a676'
+};
 // FIND ALL
+
 mongoose
   .connect(DATABASE_URL)
   .then(() => {
-    return Anime.find({ userId: '333333333333333333333300' });
+    return Favorite.findByIdAndUpdate(
+      { _id: '5ba2b8afa17988745e0683de' },
+      updateFavorite,
+      { new: true }
+    );
   })
   .then(results => {
     console.log(results);

@@ -18,53 +18,48 @@ export default class SearchResults extends Component {
   renderResults() {
     let divId = 1;
     console.log(this.state);
-    return this.state.results.data.map(manganime => {
+    return this.state.results.data.map(results => {
       let bg = {
-        backgroundImage: `url(${manganime.attributes.posterImage.original})`
+        backgroundImage: `url(${results.attributes.posterImage.original})`
       };
       let singleAnime = {
-        pathname: `/${manganime.type}/${manganime.id}`,
+        pathname: `/${results.type}/${results.id}`,
         searchResult: true,
         url: this.props.url
       };
       return (
         <Link
           to={singleAnime}
-          key={manganime.id}
+          key={results.id}
           className="SearchResultItem"
-          id={`manganime${divId++}`}
+          id={`results${divId++}`}
           style={bg}
         >
-          {/* onClick={() => this.handleClick(manganime.type, manganime.id)}> */}
+          {/* onClick={() => this.handleClick(results.type, results.id)}> */}
           <span className="title">
-            {manganime.attributes.titles.en_us
-              ? manganime.attributes.titles.en_us
+            {results.attributes.titles.en_us
+              ? results.attributes.titles.en_us
               : ''}
-            {!manganime.attributes.titles.en_us &&
-            manganime.attributes.titles.en
-              ? manganime.attributes.titles.en
+            {!results.attributes.titles.en_us && results.attributes.titles.en
+              ? results.attributes.titles.en
               : ''}
-            {!manganime.attributes.titles.en &&
-            manganime.attributes.titles.en_jp
-              ? manganime.attributes.titles.en_jp
+            {!results.attributes.titles.en && results.attributes.titles.en_jp
+              ? results.attributes.titles.en_jp
               : ''}
-            {!manganime.attributes.titles.en_jp &&
-            manganime.attributes.titles.ja_jp
-              ? manganime.attributes.titles.ja_jp
+            {!results.attributes.titles.en_jp && results.attributes.titles.ja_jp
+              ? results.attributes.titles.ja_jp
               : ''}
-            {manganime.attributes.titles.en_cn
-              ? manganime.attributes.titles.en_cn
+            {results.attributes.titles.en_cn
+              ? results.attributes.titles.en_cn
               : ''}
-            {!manganime.attributes.titles.en_cn &&
-            manganime.attributes.titles.zh_cn
-              ? manganime.attributes.titles.zh_cn
+            {!results.attributes.titles.en_cn && results.attributes.titles.zh_cn
+              ? results.attributes.titles.zh_cn
               : ''}
-            {manganime.attributes.titles.en_kr
-              ? manganime.attributes.titles.en_kr
+            {results.attributes.titles.en_kr
+              ? results.attributes.titles.en_kr
               : ''}
-            {!manganime.attributes.titles.en_kr &&
-            manganime.attributes.titles.ko_kr
-              ? manganime.attributes.titles.ko_kr
+            {!results.attributes.titles.en_kr && results.attributes.titles.ko_kr
+              ? results.attributes.titles.ko_kr
               : ''}
           </span>
         </Link>
@@ -75,53 +70,47 @@ export default class SearchResults extends Component {
   renderResultsNext() {
     let divId = 1;
     console.log(this.state);
-    return this.state.resultsNext.map(manganime => {
+    return this.state.resultsNext.map(results => {
       let bg = {
-        backgroundImage:
-          'url(' + manganime.attributes.posterImage.original + ')'
+        backgroundImage: 'url(' + results.attributes.posterImage.original + ')'
       };
       let singleAnime = {
-        pathname: `/${manganime.type}/${manganime.id}`,
+        pathname: `/${results.type}/${results.id}`,
         searchResult: true
       };
       return (
         <Link
           to={singleAnime}
-          key={manganime.id}
+          key={results.id}
           className="SearchResultItem"
-          id={`manganime${divId++}`}
+          id={`results${divId++}`}
           style={bg}
         >
-          {/* onClick={() => this.handleClick(manganime.type, manganime.id)}> */}
+          {/* onClick={() => this.handleClick(results.type, results.id)}> */}
           <span className="title">
-            {manganime.attributes.titles.en_us
-              ? manganime.attributes.titles.en_us
+            {results.attributes.titles.en_us
+              ? results.attributes.titles.en_us
               : ''}
-            {!manganime.attributes.titles.en_us &&
-            manganime.attributes.titles.en
-              ? manganime.attributes.titles.en
+            {!results.attributes.titles.en_us && results.attributes.titles.en
+              ? results.attributes.titles.en
               : ''}
-            {!manganime.attributes.titles.en &&
-            manganime.attributes.titles.en_jp
-              ? manganime.attributes.titles.en_jp
+            {!results.attributes.titles.en && results.attributes.titles.en_jp
+              ? results.attributes.titles.en_jp
               : ''}
-            {!manganime.attributes.titles.en_jp &&
-            manganime.attributes.titles.ja_jp
-              ? manganime.attributes.titles.ja_jp
+            {!results.attributes.titles.en_jp && results.attributes.titles.ja_jp
+              ? results.attributes.titles.ja_jp
               : ''}
-            {manganime.attributes.titles.en_cn
-              ? manganime.attributes.titles.en_cn
+            {results.attributes.titles.en_cn
+              ? results.attributes.titles.en_cn
               : ''}
-            {!manganime.attributes.titles.en_cn &&
-            manganime.attributes.titles.zh_cn
-              ? manganime.attributes.titles.zh_cn
+            {!results.attributes.titles.en_cn && results.attributes.titles.zh_cn
+              ? results.attributes.titles.zh_cn
               : ''}
-            {manganime.attributes.titles.en_kr
-              ? manganime.attributes.titles.en_kr
+            {results.attributes.titles.en_kr
+              ? results.attributes.titles.en_kr
               : ''}
-            {!manganime.attributes.titles.en_kr &&
-            manganime.attributes.titles.ko_kr
-              ? manganime.attributes.titles.ko_kr
+            {!results.attributes.titles.en_kr && results.attributes.titles.ko_kr
+              ? results.attributes.titles.ko_kr
               : ''}
           </span>
         </Link>
